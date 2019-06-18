@@ -1,1 +1,3 @@
 # Udacity
+
+This repo contains some of the project assignment developed for the udacity self driving car nanodegree, attended in 2017-2018. For more details dig in the respective project directory...
