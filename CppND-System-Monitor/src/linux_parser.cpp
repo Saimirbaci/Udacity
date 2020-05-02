@@ -78,8 +78,7 @@ float LinuxParser::MemoryUtilization() {
       string key;
       long value;
       string unit;
-      
-      //std::replace(line.begin(), line.end(), ' ', '_');
+
       std::istringstream linestream(line);
       linestream >> key >> value >> unit;
       if(key.compare("MemTotal:") == 0){
@@ -132,11 +131,10 @@ vector<string> LinuxParser::CpuUtilization() {
   if (filestream.is_open()) {
     while (std::getline(filestream, line)) {
       string cpu;
-      //unsigned long long int systemaltime, idlealltime, totaltime, virtalltime;
-      unsigned long long int usertime, nicetime, systemtime, idletime, ioWait, irq, softIrq, steal, guest, guestnice;
+      //unsigned long long int usertime, nicetime, systemtime, idletime, ioWait, irq, softIrq, steal, guest, guestnice;
       
       std::istringstream linestream(line);
-      linestream >> cpu >> usertime >> nicetime>> systemtime >> idletime >> ioWait >> irq >> softIrq >> steal >> guest >> guestnice;
+      linestream >> cpu;// >> usertime >> nicetime>> systemtime >> idletime >> ioWait >> irq >> softIrq >> steal >> guest >> guestnice;
       
       if(cpu.compare("cpu") == 0){
         cpu_info.push_back(line);
@@ -182,7 +180,6 @@ int LinuxParser::RunningProcesses() {
     while (std::getline(filestream, line)) {
       string key;
       long value;
-      string unit;
       
       std::istringstream linestream(line);
       linestream >> key >> value;
