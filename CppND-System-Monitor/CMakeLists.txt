@@ -9,11 +9,11 @@ file(GLOB SOURCES "src/*.cpp")
 
 add_executable(monitor ${SOURCES})
 
-add_executable(test "src/test.cc")
+#add_executable(test "src/test.cc")
 
 set_property(TARGET monitor PROPERTY CXX_STANDARD 17)
 
-set_property(TARGET test PROPERTY CXX_STANDARD 17)
+#set_property(TARGET test PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(monitor ${CURSES_LIBRARIES})
 # TODO: Run -Werror in CI.
