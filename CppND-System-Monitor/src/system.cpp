@@ -16,15 +16,7 @@ using std::string;
 using std::vector;
 
 System::System(){
-    auto pids = LinuxParser::Pids();
-    for(auto v : pids){
-        string line;
-        string username = LinuxParser::User(v);
-        string command_name = LinuxParser::Command(v);
 
-        Process process(v, username, command_name);
-        processes_.push_back(process);
-    }
 }
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }

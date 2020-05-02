@@ -8,35 +8,35 @@ class Processor {
   unsigned int NumberProcessors(){return numberprocessors_;};
 
   ~Processor(){
-      delete init_proc;
-      delete usertime_;
-      delete guest_;
-      delete nicetime_;
-      delete guestnice_;
-      delete idlealltime_;
-      delete idletime_;
-      delete ioWait_;
-      delete systemalltime_;
-      delete systemtime_;
-      delete irq_;
-      delete softIrq_;
-      delete virtalltime_;
-      delete totaltime_;
-      delete steal_;
-      delete prev_usertime_;
-      delete prev_guest_;
-      delete prev_nicetime_;
-      delete prev_guestnice_;
-      delete prev_idlealltime_;
-      delete prev_idletime_;
-      delete prev_ioWait_;
-      delete prev_systemalltime_;
-      delete prev_systemtime_;
-      delete prev_irq_;
-      delete prev_softIrq_;
-      delete prev_virtalltime_;
-      delete prev_totaltime_;
-      delete prev_steal_;      
+      delete[] init_proc;
+      delete[] usertime_;
+      delete[] guest_;
+      delete[] nicetime_;
+      delete[] guestnice_;
+      delete[] idlealltime_;
+      delete[] idletime_;
+      delete[] ioWait_;
+      delete[] systemalltime_;
+      delete[] systemtime_;
+      delete[] irq_;
+      delete[] softIrq_;
+      delete[] virtalltime_;
+      delete[] totaltime_;
+      delete[] steal_;
+      delete[] prev_usertime_;
+      delete[] prev_guest_;
+      delete[] prev_nicetime_;
+      delete[] prev_guestnice_;
+      delete[] prev_idlealltime_;
+      delete[] prev_idletime_;
+      delete[] prev_ioWait_;
+      delete[] prev_systemalltime_;
+      delete[] prev_systemtime_;
+      delete[] prev_irq_;
+      delete[] prev_softIrq_;
+      delete[] prev_virtalltime_;
+      delete[] prev_totaltime_;
+      delete[] prev_steal_;      
   }
   // TODO: Declare any necessary private members
  private:

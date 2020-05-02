@@ -160,8 +160,6 @@ int LinuxParser::TotalProcesses() {
     while (std::getline(filestream, line)) {
       string key;
       long value;
-
-      string unit;
       
       std::istringstream linestream(line);
       linestream >> key >> value;
@@ -210,9 +208,9 @@ string LinuxParser::Command(int pid) {
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid) { 
-  std::ifstream statusstream(LinuxParser::kProcDirectory + std::to_string(pid)+ "/status");
+  std::ifstream statusstream(LinuxParser::kProcDirectory + std::to_string(pid) + LinuxParser::kStatusFilename);
   string line;
-  float vmsize;
+  float vmsize = 0.0;
   if(statusstream.is_open()){
     while (std::getline(statusstream, line)) {
         string uid_line;
