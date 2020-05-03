@@ -4,6 +4,7 @@
 #include <thread>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 #include "format.h"
 #include "ncurses_display.h"
@@ -89,7 +90,12 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
   wattroff(window, COLOR_PAIR(2));
   for (int i = 0; i < n; ++i) {
     mvwprintw(window, ++row, pid_column, to_string(processes[i].Pid()).c_str());
-    mvwprintw(window, row, user_column, processes[i].User().substr(0,14).c_str());
+    
+    auto user_space = 16;
+    std::string user_blanks(user_space, ' ');
+    auto username = processes[i].User() + user_blanks;
+
+    mvwprintw(window, row, user_column, username.substr(0,14).c_str());
     float cpu = processes[i].CpuUtilization() * 100;
     mvwprintw(window, row, cpu_column, to_string(cpu).substr(0, 6).c_str());
     mvwprintw(window, row, ram_column, processes[i].Ram().substr(0,8).c_str());
@@ -99,8 +105,11 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
               to_string(processes[i].Processor()).c_str());
     mvwprintw(window, row, threads_column,
               to_string(processes[i].Threads()).c_str());
-    mvwprintw(window, row, command_column,
-              processes[i].Command().substr(0, window->_maxx - 65).c_str());
+
+    auto command_space = window->_maxx - 65;
+    std::string blanks(command_space, ' ');
+    auto command = processes[i].Command() + blanks;
+    mvwprintw(window, row, command_column, command.substr(0, command_space).c_str());
   }
 }
 
@@ -111,7 +120,8 @@ void NCursesDisplay::Display(System& system, int n) {
   start_color();  // enable color
 
   int x_max{getmaxx(stdscr)};
-  WINDOW* system_window = newwin(9, x_max - 1, 0, 0);
+  auto num_proc = system.Cpu().NumberProcessors();
+  WINDOW* system_window = newwin(9 + num_proc, x_max - 1, 0, 0);
   WINDOW* process_window =
       newwin(3 + n, x_max - 1, system_window->_maxy + 1, 0);
 

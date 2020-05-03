@@ -233,7 +233,7 @@ string LinuxParser::Uid(int pid) {
         string uid_line;
         std::istringstream linestream(line);
         linestream >> uid_line; 
-        if(uid_line.compare("Uid:")){
+        if(uid_line.compare("Uid:") == 0){
             linestream >> uid;
         }
     }

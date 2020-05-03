@@ -4,11 +4,13 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 #include "process.h"
 #include "processor.h"
 #include "system.h"
 #include "linux_parser.h"
+#include "user.h"
 
 using std::set;
 using std::size_t;
@@ -16,8 +18,33 @@ using std::string;
 using std::vector;
 
 System::System(){
-
+    ReadUsers();
 }
+
+System::~System(){    
+}  
+
+void System::ReadUsers(){
+    string line;
+    std::string name;
+    std::string password;
+    std::string userID;
+    std::string groupID;
+    std::string gecos;
+    std::string homedirectory;
+    std::string shell;
+    std::ifstream passwd_stream(LinuxParser::kPasswordPath);
+    if(passwd_stream.is_open()){
+        while (std::getline(passwd_stream, line)) {
+            std::replace(line.begin(), line.end(), ':', ' ');
+            std::istringstream linestream(line);
+            linestream >> name >> password >> userID >> groupID >> gecos >> homedirectory >> shell; 
+            auto new_user = User(name, password, userID, groupID, gecos, homedirectory, shell);
+            users_.insert(std::pair<std::string, User>(userID, new_user));
+        }
+    }
+}
+
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
@@ -26,10 +53,9 @@ vector<Process>& System::Processes() {
     processes_.clear();
     auto pids = LinuxParser::Pids();
     for(auto v : pids){
-        string line;
-        string username = LinuxParser::User(v);
+        auto uid = LinuxParser::Uid(v);
+        string username = users_[uid].GetUserName(); 
         string command_name = LinuxParser::Command(v);
-
         Process process(v, username, command_name);
         process.Stats();
         processes_.push_back(process);

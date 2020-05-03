@@ -3,6 +3,7 @@
 
 class Processor {
  public:
+  Processor();
   float Utilization();  // TODO: See src/processor.cpp
   float Utilization(unsigned int proc_id);
   unsigned int NumberProcessors(){return numberprocessors_;};
@@ -43,35 +44,34 @@ class Processor {
     unsigned int numberprocessors_ = 1;
     bool initialized = false;
     bool *init_proc = nullptr ;
-    unsigned long long int *usertime_;
-    unsigned long long int *guest_;
-    unsigned long long int *nicetime_;
-    unsigned long long int *guestnice_;
-    unsigned long long int *idlealltime_;
-    unsigned long long int *idletime_;
-    unsigned long long int *ioWait_;
-    unsigned long long int *systemalltime_;
-    unsigned long long int *systemtime_;
-    unsigned long long int *irq_;
-    unsigned long long int *softIrq_;
-    unsigned long long int *virtalltime_;
-    unsigned long long int *totaltime_;
-    unsigned long long int *steal_;
-    unsigned long long int *prev_usertime_;
-    unsigned long long int *prev_guest_;
-    unsigned long long int *prev_nicetime_;
-    unsigned long long int *prev_guestnice_;
-    unsigned long long int *prev_idlealltime_;
-    unsigned long long int *prev_idletime_;
-    unsigned long long int *prev_ioWait_;
-    unsigned long long int *prev_systemalltime_;
-    unsigned long long int *prev_systemtime_;
-    unsigned long long int *prev_irq_;
-    unsigned long long int *prev_softIrq_;
-    unsigned long long int *prev_virtalltime_;
-    unsigned long long int *prev_totaltime_;
-    unsigned long long int *prev_steal_;
-
+    unsigned long long int *usertime_ = nullptr;
+    unsigned long long int *guest_= nullptr;
+    unsigned long long int *nicetime_= nullptr;
+    unsigned long long int *guestnice_ = nullptr;
+    unsigned long long int *idlealltime_ = nullptr;
+    unsigned long long int *idletime_ = nullptr;
+    unsigned long long int *ioWait_ = nullptr;
+    unsigned long long int *systemalltime_ = nullptr;
+    unsigned long long int *systemtime_ = nullptr;
+    unsigned long long int *irq_ = nullptr;
+    unsigned long long int *softIrq_ = nullptr;
+    unsigned long long int *virtalltime_= nullptr;
+    unsigned long long int *totaltime_= nullptr;
+    unsigned long long int *steal_= nullptr;
+    unsigned long long int *prev_usertime_= nullptr;
+    unsigned long long int *prev_guest_= nullptr;
+    unsigned long long int *prev_nicetime_= nullptr;
+    unsigned long long int *prev_guestnice_= nullptr;
+    unsigned long long int *prev_idlealltime_= nullptr;
+    unsigned long long int *prev_idletime_= nullptr;
+    unsigned long long int *prev_ioWait_= nullptr;
+    unsigned long long int *prev_systemalltime_= nullptr;
+    unsigned long long int *prev_systemtime_= nullptr;
+    unsigned long long int *prev_irq_= nullptr;
+    unsigned long long int *prev_softIrq_= nullptr;
+    unsigned long long int *prev_virtalltime_= nullptr;
+    unsigned long long int *prev_totaltime_= nullptr;
+    unsigned long long int *prev_steal_= nullptr;
 };
 
 #endif

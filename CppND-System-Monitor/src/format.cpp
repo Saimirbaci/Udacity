@@ -4,6 +4,7 @@
 #include <sstream>  
 #include <ctime>
 #include <cmath>
+#include <iomanip>
 using std::string;
 using std::stringstream;
 // TODO: Complete this helper function
@@ -15,7 +16,9 @@ string Format::ElapsedTime(long seconds) {
     auto mins = floor((seconds - hours*3600)/60);
     auto secs = floor(((seconds - hours*3600) - mins*60));
     stringstream ss;
-    ss << hours << ":" << mins << ":" << secs;
+    ss << std::setw(2) << std::setfill('0') << hours << ":" 
+        << std::setw(2) << std::setfill('0') << mins << ":" 
+        << std::setw(2) << std::setfill('0') << secs;
     string s;
     ss >> s;
     return s; 

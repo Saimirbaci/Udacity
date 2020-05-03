@@ -1,12 +1,34 @@
 #include "processor.h"
 #include "linux_parser.h"
 
+Processor::Processor():numberprocessors_(LinuxParser::CpuUtilization().size()){
+    usertime_ = new unsigned long long int [numberprocessors_];
+    nicetime_ = new unsigned long long int [numberprocessors_];
+    systemtime_ = new unsigned long long int [numberprocessors_];
+    idletime_ = new unsigned long long int [numberprocessors_];
+    ioWait_ = new unsigned long long int [numberprocessors_];
+    irq_ = new unsigned long long int [numberprocessors_];
+    softIrq_ = new unsigned long long int [numberprocessors_];
+    steal_ = new unsigned long long int [numberprocessors_];
+    guest_ = new unsigned long long int [numberprocessors_];
+    guestnice_ = new unsigned long long int [numberprocessors_];
+    prev_usertime_ = new unsigned long long int [numberprocessors_];
+    prev_nicetime_ = new unsigned long long int [numberprocessors_];
+    prev_systemtime_ = new unsigned long long int [numberprocessors_];
+    prev_idletime_ = new unsigned long long int [numberprocessors_];
+    prev_ioWait_ = new unsigned long long int [numberprocessors_];
+    prev_irq_ = new unsigned long long int [numberprocessors_];
+    prev_softIrq_ = new unsigned long long int [numberprocessors_];
+    prev_steal_ = new unsigned long long int [numberprocessors_];
+    prev_guest_ = new unsigned long long int [numberprocessors_];
+    prev_guestnice_ = new unsigned long long int [numberprocessors_];
+}
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization() { 
     std::string cpu_info;
     
     auto cpu_stat = LinuxParser::CpuUtilization();
-    numberprocessors_ = cpu_stat.size();
+    //numberprocessors_ = cpu_stat.size();
 
     std::istringstream linestream(cpu_stat[0]);
     if (!initialized){
@@ -14,26 +36,6 @@ float Processor::Utilization() {
         for(unsigned int i=0; i<numberprocessors_; i++){
             init_proc[i] = false;
         }
-        usertime_ = new unsigned long long int [numberprocessors_];
-        nicetime_ = new unsigned long long int [numberprocessors_];
-        systemtime_ = new unsigned long long int [numberprocessors_];
-        idletime_ = new unsigned long long int [numberprocessors_];
-        ioWait_ = new unsigned long long int [numberprocessors_];
-        irq_ = new unsigned long long int [numberprocessors_];
-        softIrq_ = new unsigned long long int [numberprocessors_];
-        steal_ = new unsigned long long int [numberprocessors_];
-        guest_ = new unsigned long long int [numberprocessors_];
-        guestnice_ = new unsigned long long int [numberprocessors_];
-        prev_usertime_ = new unsigned long long int [numberprocessors_];
-        prev_nicetime_ = new unsigned long long int [numberprocessors_];
-        prev_systemtime_ = new unsigned long long int [numberprocessors_];
-        prev_idletime_ = new unsigned long long int [numberprocessors_];
-        prev_ioWait_ = new unsigned long long int [numberprocessors_];
-        prev_irq_ = new unsigned long long int [numberprocessors_];
-        prev_softIrq_ = new unsigned long long int [numberprocessors_];
-        prev_steal_ = new unsigned long long int [numberprocessors_];
-        prev_guest_ = new unsigned long long int [numberprocessors_];
-        prev_guestnice_ = new unsigned long long int [numberprocessors_];
 
         linestream >> cpu_info;
         linestream >> usertime_[0];
